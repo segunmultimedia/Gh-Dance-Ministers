@@ -91,3 +91,26 @@ scrollToTopBtn.addEventListener('click', () => {
         behavior: 'smooth'
     });
 });
+
+// Smooth Scroll Animations on Scroll
+const scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+            // Optional: unobserve if you want it to animate only once
+            // scrollObserver.unobserve(entry.target);
+        }
+    });
+}, {
+    threshold: 0.1,
+    rootMargin: "0px 0px -50px 0px"
+});
+
+// Auto-add scroll-fade class to major elements so we don't have to rewrite HTML
+document.addEventListener('DOMContentLoaded', () => {
+    const elementsToAnimate = document.querySelectorAll('.section-title, .about-content p, .story-card, .team-card, .mvv-card, .why-card, .what-card, .event-card, .gallery-item, .testimony-card, .blog-card');
+    elementsToAnimate.forEach(el => {
+        el.classList.add('scroll-fade');
+        scrollObserver.observe(el);
+    });
+});
