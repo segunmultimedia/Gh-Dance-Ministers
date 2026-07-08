@@ -1299,14 +1299,24 @@ input:focus, textarea:focus {
         font-size: 2.5rem;
     }
     
-    .live-counter, .live-counter-new {
+    .live-counter {
         flex-direction: column;
         gap: 20px;
+    }
+
+    .live-counter-new {
+        flex-direction: row;
+        gap: 10px;
+        justify-content: space-between;
     }
     
     .live-counter-new .counter-item .count, 
     .live-counter-new .counter-item .plus {
-        font-size: 2.2rem;
+        font-size: 1.5rem;
+    }
+
+    .live-counter-new .count-label {
+        font-size: 0.75rem;
     }
     
     .footer-grid {
