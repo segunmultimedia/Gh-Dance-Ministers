@@ -1457,3 +1457,89 @@ input:focus, textarea:focus {
     transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(255, 69, 0, 0.5);
 }
+
+/* ==========================================================================
+   Mobile Overflow & Responsive Fixes
+   ========================================================================== */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+@media (max-width: 576px) {
+    /* Prevent horizontal scrolling and fix large grid templates */
+    .testimony-grid,
+    .blog-grid,
+    .event-grid,
+    .gallery-grid,
+    .why-grid,
+    .gallery-masonry,
+    .team-grid,
+    .story-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .container {
+        width: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+/* ==========================================================================
+   Lightbox (Full Screen Image Viewer)
+   ========================================================================== */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.lightbox-content {
+    margin: auto;
+    display: block;
+    width: 90%;
+    max-width: 900px;
+    max-height: 80vh;
+    object-fit: contain;
+    animation: zoom 0.3s ease;
+}
+
+@keyframes zoom {
+    from {transform: scale(0.1)} 
+    to {transform: scale(1)}
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.lightbox-close:hover,
+.lightbox-close:focus {
+    color: var(--primary-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.gallery-img {
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.gallery-img:hover {
+    opacity: 0.7;
+}

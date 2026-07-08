@@ -114,3 +114,30 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollObserver.observe(el);
     });
 });
+
+// Lightbox Functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const lightbox = document.getElementById('imageLightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const closeLightboxBtn = document.querySelector('.lightbox-close');
+    const galleryImages = document.querySelectorAll('.gallery-img');
+
+    if (lightbox && lightboxImg && closeLightboxBtn) {
+        galleryImages.forEach(img => {
+            img.addEventListener('click', (e) => {
+                lightbox.style.display = 'block';
+                lightboxImg.src = e.target.src;
+            });
+        });
+
+        closeLightboxBtn.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target !== lightboxImg) {
+                lightbox.style.display = 'none';
+            }
+        });
+    }
+});
