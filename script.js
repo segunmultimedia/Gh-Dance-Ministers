@@ -141,27 +141,24 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
-// Auto-swipe for Testimony Grid (Continuous)
+// Auto-swipe for Testimony Grid (Infinite Interval)
 document.addEventListener('DOMContentLoaded', () => {
     const testimonyGrid = document.querySelector('.testimony-grid');
     if (testimonyGrid) {
-        let isHovered = false;
+        setInterval(() => {
+            const firstCard = testimonyGrid.querySelector('.testimony-card');
+            const cardWidth = firstCard.offsetWidth;
+            const gap = 40; // match CSS gap
+            
+            // Smoothly scroll to the right
+            testimonyGrid.scrollBy({ left: cardWidth + gap, behavior: 'smooth' });
 
-        testimonyGrid.addEventListener('mouseenter', () => isHovered = true);
-        testimonyGrid.addEventListener('mouseleave', () => isHovered = false);
-        testimonyGrid.addEventListener('touchstart', () => isHovered = true);
-        testimonyGrid.addEventListener('touchend', () => isHovered = false);
-
-        function scrollContinuously() {
-            if (!isHovered) {
-                testimonyGrid.scrollLeft += 1; // Speed of scroll
-                if (testimonyGrid.scrollLeft >= (testimonyGrid.scrollWidth - testimonyGrid.clientWidth - 1)) {
-                    testimonyGrid.scrollLeft = 0; // Loop back
-                }
-            }
-            requestAnimationFrame(scrollContinuously);
-        }
-        
-        requestAnimationFrame(scrollContinuously);
+            // After smooth scroll finishes, move the first element to the end instantly
+            setTimeout(() => {
+                testimonyGrid.appendChild(firstCard);
+                // Adjust scroll position instantly to prevent jumping
+                testimonyGrid.scrollBy({ left: -(cardWidth + gap), behavior: 'instant' });
+            }, 600); // Wait 600ms for smooth scroll to finish
+        }, 7000);
     }
 });
