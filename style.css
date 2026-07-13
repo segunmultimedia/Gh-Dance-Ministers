@@ -856,7 +856,6 @@ img {
 .testimony-grid {
     display: flex;
     overflow-x: auto;
-    scroll-snap-type: x mandatory;
     gap: 40px;
     margin-top: 50px;
     padding-bottom: 20px;
@@ -870,7 +869,6 @@ img {
 
 .testimony-card {
     flex: 0 0 calc(50% - 20px);
-    scroll-snap-align: start;
     background: white;
     padding: 40px;
     border-radius: 15px;
