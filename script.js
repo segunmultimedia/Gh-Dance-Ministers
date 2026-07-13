@@ -141,22 +141,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
-// Auto-swipe for Testimony Grid
+// Auto-swipe for Testimony Grid (Continuous)
 document.addEventListener('DOMContentLoaded', () => {
     const testimonyGrid = document.querySelector('.testimony-grid');
     if (testimonyGrid) {
-        // Auto-scroll every 7 seconds
-        setInterval(() => {
-            // Check if we reached the end
-            if (testimonyGrid.scrollLeft + testimonyGrid.clientWidth >= testimonyGrid.scrollWidth - 10) {
-                // Scroll back to the beginning
-                testimonyGrid.scrollTo({ left: 0, behavior: 'smooth' });
-            } else {
-                // Scroll to the right by the width of one card plus gap
-                const cardWidth = testimonyGrid.querySelector('.testimony-card').offsetWidth;
-                const gap = 40; // match CSS gap
-                testimonyGrid.scrollBy({ left: cardWidth + gap, behavior: 'smooth' });
+        let isHovered = false;
+
+        testimonyGrid.addEventListener('mouseenter', () => isHovered = true);
+        testimonyGrid.addEventListener('mouseleave', () => isHovered = false);
+        testimonyGrid.addEventListener('touchstart', () => isHovered = true);
+        testimonyGrid.addEventListener('touchend', () => isHovered = false);
+
+        function scrollContinuously() {
+            if (!isHovered) {
+                testimonyGrid.scrollLeft += 1; // Speed of scroll
+                if (testimonyGrid.scrollLeft >= (testimonyGrid.scrollWidth - testimonyGrid.clientWidth - 1)) {
+                    testimonyGrid.scrollLeft = 0; // Loop back
+                }
             }
-        }, 7000);
+            requestAnimationFrame(scrollContinuously);
+        }
+        
+        requestAnimationFrame(scrollContinuously);
     }
 });
