@@ -157,8 +157,8 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 testimonyGrid.appendChild(firstCard);
                 // Adjust scroll position instantly to prevent jumping
-                testimonyGrid.scrollBy({ left: -(cardWidth + gap), behavior: 'instant' });
-            }, 600); // Wait 600ms for smooth scroll to finish
+                testimonyGrid.scrollBy({ left: -(cardWidth + gap), behavior: 'auto' });
+            }, 800); // Wait 800ms for smooth scroll to finish
         }, 7000);
     }
 });
