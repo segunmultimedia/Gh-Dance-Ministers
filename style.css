@@ -854,13 +854,25 @@ img {
    Testimonials
    ========================================================================== */
 .testimony-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
     gap: 40px;
     margin-top: 50px;
+    padding-bottom: 20px;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.testimony-grid::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
 }
 
 .testimony-card {
+    min-width: 350px;
+    flex: 0 0 auto;
+    scroll-snap-align: center;
     background: white;
     padding: 40px;
     border-radius: 15px;
@@ -1483,7 +1495,6 @@ html, body {
 
 @media (max-width: 576px) {
     /* Prevent horizontal scrolling and fix large grid templates */
-    .testimony-grid,
     .blog-grid,
     .event-grid,
     .gallery-grid,
